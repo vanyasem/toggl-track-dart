@@ -37,15 +37,33 @@ Future<void> main(List<String> arguments) async {
   print('Fetching data for ${dateRange.startDate} to ${dateRange.endDate}');
   print('');
 
+  final userId = int.parse(config.userId);
+
   try {
     for (final workspaceId in config.workspaceIds) {
       print('--- Workspace: $workspaceId ---');
-      final json = await client.fetchProjectSummary(
+      final entries = await client.fetchProjectSummary(
         workspaceId: workspaceId,
         startDate: dateRange.startDate,
         endDate: dateRange.endDate,
       );
-      print(json);
+
+      final userEntries =
+          entries.where((e) => e['user_id'] == userId).toList();
+
+      if (userEntries.isEmpty) {
+        print('  No tracked time');
+      } else {
+        var totalSeconds = 0;
+        for (final entry in userEntries) {
+          final seconds = entry['tracked_seconds'] as int;
+          totalSeconds += seconds;
+          final hours = (seconds / 3600.0).toStringAsFixed(2);
+          print('  Project ${entry['project_id']}: ${hours}h');
+        }
+        final totalHours = (totalSeconds / 3600.0).toStringAsFixed(2);
+        print('  Total: ${totalHours}h');
+      }
       print('');
     }
   } finally {

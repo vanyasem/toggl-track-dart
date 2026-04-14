@@ -11,7 +11,7 @@ class TogglClient {
             'Basic ${base64Encode(utf8.encode('$username:$password'))}',
         _client = http.Client();
 
-  Future<String> fetchProjectSummary({
+  Future<List<Map<String, dynamic>>> fetchProjectSummary({
     required String workspaceId,
     required String startDate,
     required String endDate,
@@ -40,7 +40,7 @@ class TogglClient {
       );
     }
 
-    return response.body;
+    return (jsonDecode(response.body) as List).cast<Map<String, dynamic>>();
   }
 
   void close() => _client.close();
