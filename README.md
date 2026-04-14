@@ -48,11 +48,11 @@ dart pub get
 ## Usage
 
 ```sh
-dart run toggl_track <month> [year]
+dart run toggl_track [month] [year]
 ```
 
-- `month` - month number (1-12), required
-- `year` - optional, defaults to the current year
+- `month` - month number (1-12), defaults to the current month
+- `year` - defaults to the current year
 
 ## License
 

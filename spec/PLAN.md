@@ -27,3 +27,9 @@ Ask me clarifying questions about the task.
 The output of the endpoint implemented in Stage 1 looks like this: `[{"user_id":789,"project_id":123,"tracked_seconds":1234},{"user_id":789,"project_id":456,"tracked_seconds":1234}]`
 
 Remove the raw output of JSON, and instead only output `tracked_seconds` converted to hours in a human-readible format. First, output the hours for each individual project_id, then output the total amount of hours. Make sure to only count `tracked_seconds` by a specific `user_id`. Read `USER_ID` from @.env
+
+## Stage 3
+
+Use Dart MCP. Use context7 MCP.
+
+Make "month" optional as well, and default to the current month. Update @README.md to reflect the change.

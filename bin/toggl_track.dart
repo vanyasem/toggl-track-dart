@@ -5,20 +5,19 @@ import 'package:toggl_track/env_loader.dart';
 import 'package:toggl_track/toggl_client.dart';
 
 Future<void> main(List<String> arguments) async {
-  if (arguments.isEmpty) {
-    print('Usage: toggl_track <month> [year]');
-    print('Example: toggl_track 4');
-    print('Example: toggl_track 4 2025');
-    exit(1);
-  }
-
-  final month = int.tryParse(arguments.first);
-  if (month == null || month < 1 || month > 12) {
-    print('Error: month must be a number between 1 and 12');
-    exit(1);
-  }
-
+  int month = DateTime.now().month;
   int? year;
+
+  if (arguments.isNotEmpty) {
+    final parsedMonth = int.tryParse(arguments.first);
+    if (parsedMonth == null || parsedMonth < 1 || parsedMonth > 12) {
+      print('Error: month must be a number between 1 and 12');
+      print('Usage: toggl_track [month] [year]');
+      exit(1);
+    }
+    month = parsedMonth;
+  }
+
   if (arguments.length > 1) {
     year = int.tryParse(arguments[1]);
     if (year == null) {
