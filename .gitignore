@@ -46,3 +46,4 @@ app.*.map.json
 
 ### === CUSTOM ===
 .env
+bin/toggl_track.exe
